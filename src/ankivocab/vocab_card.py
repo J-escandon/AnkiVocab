@@ -1,0 +1,1 @@
+class VocabCard:\n    def __init__(self, word, definition):\n        self.word = word\n        self.definition = definition\n\n    def __repr__(self):\n        return f"{self.word}: {self.definition}"\n

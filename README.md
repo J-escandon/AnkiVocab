@@ -1,0 +1,1 @@
+# Ankivocab\n\nA tool to ease the process of creating vocabulary cards for Anki.\n\n## Installation\n\n```sh\npip install -r requirements.txt\n```\n\n## Usage\n\nInstructions on how to use the tool.\n
