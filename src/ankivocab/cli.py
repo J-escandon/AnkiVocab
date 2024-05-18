@@ -1,10 +1,16 @@
+# src/ankivocab/cli.py
+
 import argparse
 from ankivocab.vocab_card import VocabCard
+from ankivocab.web_scraper import WebScraper
 import csv
 
-def add_vocab_card(word, gender, info, context, definition, pictures, pronunciation, recording, test_spelling):
-    pictures_list = pictures.split(",") if pictures else []
-    card = VocabCard(word, gender, info, context, definition, pictures_list, pronunciation, recording, test_spelling)
+def add_vocab_card_auto(word):
+    scraper = WebScraper(word)
+    definition = scraper.fetch_definition()
+    # Fetch other fields similarly
+
+    card = VocabCard(word, definition=definition)
     return card
 
 def export_to_csv(cards, filename):
@@ -18,6 +24,7 @@ def main():
     parser = argparse.ArgumentParser(description="AnkiVocab CLI tool")
     parser.add_argument('--add', nargs=9, metavar=('WORD', 'GENDER', 'INFO', 'CONTEXT', 'DEFINITION', 'PICTURE', 'PRONUNCIATION', 'RECORDING', 'TEST_SPELLING'),
                         help="Add a new vocabulary card")
+    parser.add_argument('--add-auto', metavar='WORD', help="Add a new vocabulary card with auto-filled fields")
     parser.add_argument('--export', metavar='FILENAME', help="Export vocabulary cards to a CSV file")
 
     args = parser.parse_args()
@@ -30,9 +37,5 @@ def main():
         cards.append(card)
         print(f"Added: {card}")
 
-    if args.export:
-        export_to_csv(cards, args.export)
-        print(f"Exported to {args.export}")
-
-if __name__ == "__main__":
-    main()
+    if args.add_auto:
+        word = args.add_auto
