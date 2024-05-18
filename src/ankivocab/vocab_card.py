@@ -17,7 +17,7 @@ class VocabCard:
                 f"Info: {self.info}\n"
                 f"Context: {self.context}\n"
                 f"Definition: {self.definition}\n"
-                f"Picture: {', '.join(self.picture)}\n"
+                f"Picture: {', '.join(self.pictures)}\n"
                 f"Pronunciation (Recording and/or IPA): {self.pronunciation}\n"
                 f"Recording: {self.recording}\n"
                 f"Test Spelling? (y = yes, blank = no: {self.test_spelling}")
